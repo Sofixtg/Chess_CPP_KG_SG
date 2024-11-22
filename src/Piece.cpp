@@ -7,89 +7,49 @@ namespace KS{
 
     /**
      * @authors Kaleb Gebrehiwot and Sofonias Gebre
-     * @brief An abstract class to represent chess pieces
+     * @brief An bit representation of chess pieces
      */
     class Piece{
         public:
-            const bool white;
-            const int value;
-            const PieceType pieceType;
-            
-            virtual void move() = 0;
-            
+            const int NONE = 0;
+            const int KING = 1;
+            const int PAWN = 2;
+            const int BISHOP = 3;
+            const int KNIGHT = 5;
+            const int ROOK = 6;
+            const int QUEEN = 7;
 
-        protected:
-            Piece(bool white_, int value_, PieceType pieceType_): white(white_), value(value_), pieceType(pieceType_){
-                
+            const int WHITE = 8;
+            const int BLACK = 16;
+
+            static const int pieceMask = 0b00111;
+            static const int whiteMask = 0b01000;
+            static const int blackMask = 0b10000;
+            static const int colorMask = 0b11000;
+
+            static bool isColor(int piece, int color){
+                return (piece & colorMask) == color;
             }
 
-    };
-    enum PieceType{
-        king,
-        queen,
-        bishop,
-        knight,
-        rook,
-        pawn
-    };
-
-    //  --------------- Defining Pieces ------------------
-
-    class Pawn : public Piece{
-        public:
-            Pawn(bool white_):
-            Piece(white_, 1, PieceType::pawn){}
-
-            void move() override{
-
+            static int Color(int piece){
+                return (piece & colorMask);
             }
-        private: 
-
-    };
-
-    class Bishop : public Piece{
-        public:
-            Bishop(bool white_):
-            Piece(white_, 3, PieceType::bishop){}
-
-        private:
-
-    };
-
-    class Knight : public Piece{
-        public:
-            Knight(bool white_):
-            Piece(white_, 3, PieceType::knight){}
             
-        private:
+            static int PieceType(int piece){
+                return (piece & pieceMask);
+            }
 
-    };
+            static bool IsRookOrQueen (int piece) {
+			    return (piece & 0b110) == 0b110;
+		    }
 
-    class Rook : public Piece{
-        public:
-            Rook(bool white_):
-            Piece(white_, 5, PieceType::rook){}
-            
-        private:
+		    static bool IsBishopOrQueen (int piece) {
+			    return (piece & 0b101) == 0b101;
+		    }
 
-    };
-
-    class Queen : public Piece{
-        public:
-            Queen(bool white_):
-            Piece(white_, 9, PieceType::queen){}
-            
-        private:
-
-    };
-
-    class King : public Piece{
-        public:
-            King(bool white_):
-            Piece(white_, INT_MAX, PieceType::king){}
-            
-        private:
-            bool hasMoved = false;
+		    static bool IsSlidingPiece (int piece) {
+			    return (piece & 0b100) != 0;
+		    } 
     };
 }
 
