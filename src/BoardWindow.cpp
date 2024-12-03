@@ -47,7 +47,7 @@ class BoardWindow : public AUGL::Window{
         }
 
         void UpdateBoard(int* board, int* highlight){
-
+           
         }
         // need to add destructor
     private:
