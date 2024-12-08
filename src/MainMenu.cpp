@@ -25,7 +25,7 @@ public:
         // Display "CHESS" text in the center of the window
         titleBox = new Fl_Box(FL_FLAT_BOX, 150, 50, width - 300, 100, "CHESS");
         titleBox->labelsize(48);  // Set font size for the text
-        titleBox->labeltype(FL_BOLD);  // Set text to bold
+        //titleBox->labeltype(FL_BOLD);  // Set text to bold
         titleBox->align(FL_ALIGN_CENTER);  // Center the text within the box
 
         // Play Local Multiplayer Button
